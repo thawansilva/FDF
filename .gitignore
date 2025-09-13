@@ -1,8 +1,8 @@
 *.swp
 *.pdf
-push_swap
 /maps
 fdf
+fdf_linux
 
 # Prerequisites
 *.d

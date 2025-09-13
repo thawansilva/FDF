@@ -2,25 +2,25 @@ NAME := fdf
 # Directories
 SRCDIR := src/
 OBJDIR := obj/
-INCDIR := include/ lib/libft/ lib/MLX42/include/MLX42/
+MLXDIR := lib/MLX42
+INCDIR := include lib/libft $(MLXDIR)/include
 
 # Source files and Objects
-SRC := main.c 
+SRC := main.c error_msg.c validate_map.c
 
 SRC := $(SRC:%=$(SRCDIR)%)
 OBJS := $(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 
 # Libs
-LIBMLX := lib/MLX42
-LIBS := ft mlx 
+LIBS := ft mlx42 dl glfw m
 LIBS_TARGET := lib/libft/libft.a
 
 # Flags
 CC := clang
 CFLAGS := -Wall -Wextra -Werror -g2 -O0
 CPPFLAGS := $(addprefix -I, $(INCDIR))
-LDFLAGS := $(addprefix -L, $(dir $(LIBS_TARGET)))
-LDLIBS := $(addprefix -l, $(LIBS)) -lm
+LDFLAGS := $(addprefix -L, $(dir $(LIBS_TARGET))) -L$(MLXDIR)/build
+LDLIBS := $(addprefix -l, $(LIBS)) -pthread
 
 # Useful variables
 RM := rm -f
@@ -31,16 +31,16 @@ END_COLOR := \033[0m
 
 all: $(NAME) 
 
-$(NAME): $(OBJS) $(LIBS_TARGET) libmlx.a
-	@$(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBS_TARGET) libmlx
+	@$(CC) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 	@echo "✅ $(COLOR_GREEN)$(NAME) CREATED $(END_COLOR)"
 
 $(LIBS_TARGET):
 	@$(MAKE) -C $(@D)
 
-libmlx.a: 
-	@cmake $(LIBMLX) -B $(LIBMLX)/build
-	@make -C $(LIBMLX)/build -j4
+libmlx: 
+	@cmake $(MLXDIR) -B $(MLXDIR)/build
+	@make -C $(MLXDIR)/build -j4 DEBUG=1
 	@echo "✅ $(COLOR_GREEN)$@ CREATED $(END_COLOR)"
 
 $(OBJDIR)%.o: $(SRCDIR)%.c

@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/12 14:33:44 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/12 14:33:44 by thaperei         ###   ########.fr       */
+/*   Created: 2025/09/13 14:40:52 by thaperei          #+#    #+#             */
+/*   Updated: 2025/09/13 14:40:52 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-#define FDF_H
-# include <errno.h>
-# include <string.h>
-# include <fcntl.h>
-# include "libft.h"
-# include "MLX42/MLX42.h"
-# define WIDTH 256
-# define HEIGHT 256
+#include "fdf.h"
 
-typedef struct s_point
+void	error_msg(char *str)
 {
-	int	x;
-	int	y;
-	int	z;
-}	t_point;
-
-void	error_msg(char *str);
-void	validate_map(char **argv);
-#endif 
+	ft_putendl_fd(str, STDERR);
+	exit(1);
+}

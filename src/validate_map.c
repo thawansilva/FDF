@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/12 14:33:44 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/12 14:33:44 by thaperei         ###   ########.fr       */
+/*   Created: 2025/09/13 16:36:16 by thaperei          #+#    #+#             */
+/*   Updated: 2025/09/13 16:36:16 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-#define FDF_H
-# include <errno.h>
-# include <string.h>
-# include <fcntl.h>
-# include "libft.h"
-# include "MLX42/MLX42.h"
-# define WIDTH 256
-# define HEIGHT 256
+#include "fdf.h"
 
-typedef struct s_point
+void validate_map(char **argv)
 {
-	int	x;
-	int	y;
-	int	z;
-}	t_point;
-
-void	error_msg(char *str);
-void	validate_map(char **argv);
-#endif 
+	int	 fd = open(*argv, O_RDONLY);
+	if (fd < 0)
+		error_msg(strerror(errno));
+	close(fd);
+}

@@ -16,9 +16,16 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include "./gnl/get_next_line.h"
+
+// Standard Outputs
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
+
+// True / False MACROS 
+# define FALSE 0
+# define TRUE 1
+
 
 // Structures
 typedef struct s_list
