@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 
 static void	*ft_free(char *s1, char *s2)
 {
@@ -64,7 +64,6 @@ static char	*ft_get_remainder(char *str)
 static char	*ft_parse_line(char *rest, int fd)
 {
 	char	*buff;
-	char	*tmp_rest;
 	int		bytes_read;
 
 	buff = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
@@ -77,9 +76,7 @@ static char	*ft_parse_line(char *rest, int fd)
 		if (bytes_read < 0)
 			return (ft_free(buff, rest));
 		buff[bytes_read] = '\0';
-		tmp_rest = ft_strjoin(rest, buff);
-		free(rest);
-		rest = tmp_rest;
+		rest = append_remainder(rest, buff);
 		if (ft_strchr(buff, '\n'))
 			break ;
 	}

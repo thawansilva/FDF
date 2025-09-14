@@ -12,7 +12,7 @@ SRCS = ft_isalpha.c ft_isalnum.c ft_isdigit.c ft_memset.c\
 	   $(SRCPRINT)/ft_printf.c $(SRCPRINT)/ft_print_hex.c\
 	   $(SRCPRINT)/ft_print_nbr.c $(SRCPRINT)/ft_print_ptr.c\
 	   $(SRCPRINT)/ft_print_str.c $(SRCPRINT)/ft_print_unbr.c\
-	   $(SRCGNL)/get_next_line.c
+	   $(SRCGNL)/get_next_line.c $(SRCGNL)/get_next_line_utils.c\
 
 SRCBONUS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c\
 		   ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c\

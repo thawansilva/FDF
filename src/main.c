@@ -19,12 +19,12 @@ static void ft_error(void)
 		exit(EXIT_FAILURE);
 }
 
-static void	ft_hook(void *param)
-{
-	const mlx_t	*mlx = param;
-
-	printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
-}
+//static void	ft_hook(void *param)
+//{
+//	const mlx_t	*mlx = param;
+//
+//	printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
+//}
 
 int main(int argc, char **argv)
 {
@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	mlx_loop_hook(mlx, ft_hook, mlx);
+	//mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);

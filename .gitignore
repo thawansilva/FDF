@@ -3,6 +3,7 @@
 /maps
 fdf
 fdf_linux
+lib/MLX42/build/**/*
 
 # Prerequisites
 *.d
