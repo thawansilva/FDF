@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_msg.c                                        :+:      :+:    :+:   */
+/*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/13 14:40:52 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/13 14:40:52 by thaperei         ###   ########.fr       */
+/*   Created: 2025/09/15 14:04:59 by thaperei          #+#    #+#             */
+/*   Updated: 2025/09/15 14:04:59 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	error_msg(char *str)
+void	free_arr(char **arr)
 {
-	ft_putendl_fd(str, STDERR);
-	exit(EXIT_FAILURE);
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
 }
