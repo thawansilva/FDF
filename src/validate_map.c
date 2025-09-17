@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 16:36:16 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/15 19:41:01 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/16 10:04:46 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ int	is_valid_hex(char *str)
 			return (0);
 		i++;
 	}
-	i++;
-	if (str[i] != '\0' || str[i] != '\n')
-		return (1);
-	return (0);
+	if (i < 5 || i > 8)
+		return (0);
+	if (!(str[i] != '\0' || str[i] != '\n'))
+		return (0);
+	return (1);
 }
 
 static int	is_valid_point(char *str)
@@ -60,9 +61,8 @@ static int	is_valid_point(char *str)
 		i++;
 	while (ft_isdigit(str[i]))
 		i++;
-	if (str[i] == ',' && is_valid_hex(&str[i + 1]))
-		return (1);
-	if (str[i] == '\0' || str[i] == '\n')
+	if ((str[i] == ',' && is_valid_hex(&str[i + 1]))
+		|| (str[i] == '\0' || str[i] == '\n'))
 		return (1);
 	return (0);
 }
