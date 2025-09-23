@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 14:04:59 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/22 16:15:56 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/23 10:18:44 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ void	free_arr(char **arr)
 {
 	int	i;
 
+	if (!arr)
+		return ;
 	i = 0;
 	while (arr[i])
 	{
 		free(arr[i]);
 		i++;
 	}
+	free(arr);
 }
 
 void	free_map(t_map *map)
