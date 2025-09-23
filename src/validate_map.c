@@ -6,21 +6,22 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 16:36:16 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/16 10:04:46 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:17:47 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	terminate_process(char *line, int fd)
+static void	terminate_process(t_mlx_data *fdf_data, char *line, int fd)
 {
-	while (line)
+	while (line != NULL)
 	{
 		free(line);
 		line = get_next_line(fd);
 	}
-	error_msg("Invalid Map");
+	free(fdf_data->file_line);
 	close(fd);
+	error_msg("Invalid Map");
 }
 
 int	is_valid_hex(char *str)
@@ -94,28 +95,31 @@ static int	is_valid_line(char *line)
 	return (1);
 }
 
-void	validate_map(char **argv)
+void	validate_map(char **argv, t_mlx_data *fdf_data)
 {
 	int		fd;
-	int		height;
 	char	*line;
+	char	*tmp_line;
 
 	fd = open(*argv, O_RDONLY);
 	if (fd < 0)
 		error_msg(strerror(errno));
-	height = 0;
+	fdf_data->map.height = 0;
+	fdf_data->file_line = NULL;
 	while (true)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
 		if (!is_valid_line(line))
-			terminate_process(line, fd);
-		height++;
+			terminate_process(fdf_data, line, fd);
+		tmp_line = ft_strjoin(fdf_data->file_line, line);
+		free(fdf_data->file_line);
+		fdf_data->file_line = tmp_line;
 		free(line);
+		fdf_data->map.height++;
 	}
-	if (height < 2)
-		terminate_process(NULL, fd);
-	ft_putendl_fd("✅ Valid Map", STDOUT);
+	if (fdf_data->map.height < 2)
+		terminate_process(fdf_data, NULL, fd);
 	close(fd);
 }

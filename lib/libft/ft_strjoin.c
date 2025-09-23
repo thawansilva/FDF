@@ -6,7 +6,7 @@
 /*   By: thaperei <thawansilva@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 14:12:31 by thaperei          #+#    #+#             */
-/*   Updated: 2025/07/16 14:12:31 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/22 16:53:11 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	full_len;
 	char	*full_str;
 
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
 	full_len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	full_str = (char *) ft_calloc(full_len, sizeof(char));

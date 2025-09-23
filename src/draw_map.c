@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_memory.c                                      :+:      :+:    :+:   */
+/*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/15 14:04:59 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/22 16:15:56 by thaperei         ###   ########.fr       */
+/*   Created: 2025/09/19 11:00:05 by thaperei          #+#    #+#             */
+/*   Updated: 2025/09/22 16:06:21 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	free_arr(char **arr)
+void	draw_map(t_mlx_data *fdf)
 {
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-}
-
-void	free_map(t_map *map)
-{
-	int			i;
 	t_3dpoint	**matrix;
+	int			i;
 
-	if (map == NULL)
-		return ;
+	matrix = fdf->map.matrix;
 	i = 0;
-	matrix = map->matrix;
-	while (i < map->height * map->max_width)
+	while (i < fdf->map.max_width)
 	{
-		free(matrix[i]);
+		if (matrix[i] == NULL)
+			return ;
+		mlx_put_pixel(fdf->imgs[0], matrix[i]->x, matrix[i]->y, 0xFF0000FF);
 		i++;
 	}
-	free(matrix);
 }
