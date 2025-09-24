@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 16:40:03 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/24 14:00:01 by thaperei         ###   ########.fr       */
+/*   Created: 2025/09/24 14:17:09 by thaperei          #+#    #+#             */
+/*   Updated: 2025/09/24 14:23:10 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ static int	find_index_in_base(char letter, char *base)
 	return (-1);
 }
 
-static unsigned int	convert_str_to_uint(char *str, char *base)
+static int	convert_str_to_int(char *str, char *base)
 {
-	int				i;
-	int				base_length;
-	int				value;
-	unsigned int	result;
+	int	i;
+	int	base_length;
+	int	value;
+	int	result;
 
 	i = 0;
 	base_length = 0;
@@ -73,7 +73,7 @@ static unsigned int	convert_str_to_uint(char *str, char *base)
 	return (result);
 }
 
-unsigned int	ft_atoi_base(char *str, char *base)
+int	ft_atoi_base(char *str, char *base)
 {
 	int	i;
 	int	sign;
@@ -90,5 +90,5 @@ unsigned int	ft_atoi_base(char *str, char *base)
 			sign = -sign;
 		i++;
 	}
-	return (sign * convert_str_to_uint((str + i), base));
+	return (sign * convert_str_to_int((str + i), base));
 }
