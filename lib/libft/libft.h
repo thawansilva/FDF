@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:04:57 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/23 13:07:41 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/24 14:00:34 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void						*ft_calloc(size_t nmemb, size_t size);
 // ---------------------------- Conversion ------------------------------------
 int							ft_atoi(const char *nbr);
 long						ft_atol(const char *nbr);
+unsigned int				ft_atoi_base(char *str, char *base);
 
 // ---------------------------- Linked list Manipulation ----------------------
 t_list						*ft_lstnew(void *content);
