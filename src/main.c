@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:13:05 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/24 13:30:47 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/24 20:12:25 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ void	init_fdf(t_mlx_data *fdf)
 	fdf->map.height = 0;
 	fdf->map.max_width = 0;
 	fdf->file_line = NULL;
+}
+
+void	delete_fdf(t_mlx_data *fdf)
+{
+	mlx_delete_image(fdf->mlx, fdf->imgs[WIREFRAME]);
+	mlx_delete_image(fdf->mlx, fdf->imgs[MENU]);
+	free_map(&fdf->map);
 }
 
 static void	ft_hook(void *param)
@@ -47,7 +54,7 @@ int	main(int argc, char **argv)
 	draw_menu(&fdf);
 	mlx_loop_hook(fdf.mlx, ft_hook, &fdf);
 	mlx_loop(fdf.mlx);
-	free_map(&fdf.map);
+	delete_fdf(&fdf);
 	mlx_terminate(fdf.mlx);
 	return (EXIT_SUCCESS);
 }

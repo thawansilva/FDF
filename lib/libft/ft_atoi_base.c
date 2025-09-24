@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:17:09 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/24 14:23:10 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/24 17:27:16 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,19 @@ static int	find_index_in_base(char letter, char *base)
 	return (-1);
 }
 
-static int	convert_str_to_int(char *str, char *base)
+static unsigned int	convert_str_to_int(char *str, char *base)
 {
-	int	i;
-	int	base_length;
-	int	value;
-	int	result;
+	int				i;
+	int				base_length;
+	int				value;
+	unsigned int	result;
 
+	base_length = ft_strlen(base);
 	i = 0;
-	base_length = 0;
 	result = 0;
-	while (base[base_length] != '\0')
-		base_length++;
 	while (str[i] != '\0')
 	{
-		value = find_index_in_base(str[i], base);
+		value = find_index_in_base(ft_toupper(str[i]), base);
 		if (value == -1)
 			break ;
 		result = result * base_length + value;
@@ -73,22 +71,14 @@ static int	convert_str_to_int(char *str, char *base)
 	return (result);
 }
 
-int	ft_atoi_base(char *str, char *base)
+unsigned int	ft_atoi_base(char *str, char *base)
 {
-	int	i;
-	int	sign;
+	unsigned int	result;
 
-	sign = 1;
-	i = 0;
-	if (!is_valid_base(base) || str[i] == '\0')
+	if (!is_valid_base(base) || *str == '\0')
 		return (0);
-	while (ft_isspace(str[i]))
-		i++;
-	while (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -sign;
-		i++;
-	}
-	return (sign * convert_str_to_int((str + i), base));
+	if (!ft_strncmp(str, "0x", 2))
+		str += 2;
+	result = convert_str_to_int((str), base);
+	return (result);
 }

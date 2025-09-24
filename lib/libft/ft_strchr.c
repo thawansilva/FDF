@@ -6,7 +6,7 @@
 /*   By: thaperei <thawansilva@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:04:19 by thaperei          #+#    #+#             */
-/*   Updated: 2025/07/14 15:04:19 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/24 14:49:37 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ char	*ft_strchr(const char *str, int c)
 	}
 	if ((char)c == '\0')
 		return ((char *)str);
-	return (0);
+	return ((void *) 0);
 }
