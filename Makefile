@@ -6,7 +6,8 @@ MLXDIR := lib/MLX42
 INCDIR := include lib/libft $(MLXDIR)/include
 
 # Source files and Objects
-SRC := main.c error_msg.c validate_map.c free_memory.c init_map.c draw_map.c\
+SRC := main.c error_msg.c free_memory.c maps/init_map.c maps/validate_map.c \
+	   maps/draw_map.c images/create_images.c images/menu.c \
 
 SRC := $(SRC:%=$(SRCDIR)/%)
 OBJS := $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)

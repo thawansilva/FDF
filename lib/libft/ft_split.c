@@ -6,13 +6,24 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 11:25:25 by thaperei          #+#    #+#             */
-/*   Updated: 2025/07/18 11:25:25 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/23 11:04:59 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
 
-static int	ft_count_words(char const *s, char c)
+static int	ft_is_sep(char c, char *charset)
+{
+	while (*charset)
+	{
+		if (c == *charset)
+			return (1);
+		charset++;
+	}
+	return (0);
+}
+
+static int	ft_count_words(char const *s, char *charset)
 {
 	int	start;
 	int	i;
@@ -25,12 +36,12 @@ static int	ft_count_words(char const *s, char c)
 	count = 0;
 	while (s[i])
 	{
-		if (s[i] == c && i != start)
+		if (ft_is_sep(s[i], charset) && i != start)
 		{
 			count++;
 			start = i + 1;
 		}
-		else if (s[i] == c && i == start)
+		else if (ft_is_sep(s[i], charset) && i == start)
 			start = i + 1;
 		i++;
 	}
@@ -51,7 +62,7 @@ static void	ft_free_arr(char **arr)
 	free(arr);
 }
 
-static void	ft_insert_str(char **arr, const char *s, char c)
+static void	ft_insert_str(char **arr, const char *s, char *charset)
 {
 	size_t	i;
 	size_t	j;
@@ -62,14 +73,14 @@ static void	ft_insert_str(char **arr, const char *s, char c)
 	start = 0;
 	while (s[i])
 	{
-		if (s[i] == c && i != start)
+		if (ft_is_sep(s[i], charset) && i != start)
 		{
 			arr[j] = ft_substr(s, start, i - start);
 			if (!arr[j++])
 				return (ft_free_arr(arr));
 			start = i + 1;
 		}
-		else if (s[i] == c && i == start)
+		else if (ft_is_sep(s[i], charset) && i == start)
 			start = i + 1;
 		i++;
 	}
@@ -77,15 +88,15 @@ static void	ft_insert_str(char **arr, const char *s, char c)
 		arr[j++] = ft_substr(s, start, i - start);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char *charset)
 {
 	char	**arr;
 
 	if (!s)
 		return (NULL);
-	arr = ft_calloc((ft_count_words(s, c) + 1), sizeof(char *));
+	arr = ft_calloc((ft_count_words(s, charset) + 1), sizeof(char *));
 	if (!arr)
 		return (NULL);
-	ft_insert_str(arr, s, c);
+	ft_insert_str(arr, s, charset);
 	return (arr);
 }

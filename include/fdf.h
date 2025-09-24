@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:33:44 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/22 16:42:57 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/24 13:33:39 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,18 @@
 # include "MLX42/MLX42.h"
 # define WIDTH 1920
 # define HEIGHT 1080
-# define QNT_IMAGES 3
+# define MENU_WIDTH 300
+# define QNT_IMAGES 2
 
 // Limit
 # define INT_MAX 2147483647 
 # define INT_MIN -2147483648
+
+enum e_images
+{
+	WIREFRAME,
+	MENU
+};
 
 typedef struct s_3dpoint
 {
@@ -55,8 +62,12 @@ typedef struct s_mlx_data
 	t_map		map;
 }	t_mlx_data;
 
+// Images
+void	create_images(t_mlx_data *fdf);
+void	draw_menu(t_mlx_data *fdf);
+
 // Map functions
-void	init_map(char **argv, t_map *map, char *file_line);
+void	init_map(char **argv, t_mlx_data *fdf);
 void	draw_map(t_mlx_data *fdf);
 
 // Error Message

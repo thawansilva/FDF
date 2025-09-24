@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 16:06:18 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/22 16:49:18 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/24 13:17:55 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	set_map_size(char *filename, t_map *map)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		arr_str = ft_split(line, ' ');
+		arr_str = ft_split(line, " ");
 		while (arr_str[i] != NULL)
 			i++;
 		if (i > map->max_width)
@@ -73,7 +73,7 @@ void	insert_point(t_map *map, char **split_line, int *row_idx, int *col_idx)
 	set_3dpoint(map, split_line, row_idx, col_idx);
 }
 
-void	init_map(char **argv, t_map *map, char *file_line)
+void	init_map(char **argv, t_mlx_data *fdf)
 {
 	int		fd;
 	int		col_idx;
@@ -81,15 +81,15 @@ void	init_map(char **argv, t_map *map, char *file_line)
 	char	**split_line;
 
 	fd = open(*argv, O_RDONLY);
-	set_map_size(*argv, map);
-	map->matrix = matrix_alloc(map->max_width, map->height);
+	set_map_size(*argv, &fdf->map);
+	fdf->map.matrix = matrix_alloc(fdf->map.max_width, fdf->map.height);
 	row_idx = 0;
-	split_line = ft_split(file_line, ' ');
-	while (row_idx < map->height)
+	split_line = ft_split(fdf->file_line, " \n");
+	while (row_idx < fdf->map.height)
 	{
 		col_idx = 0;
-		while (col_idx < map->max_width)
-			insert_point(map, split_line, &row_idx, &col_idx);
+		while (col_idx < fdf->map.max_width)
+			insert_point(&fdf->map, split_line, &row_idx, &col_idx);
 		row_idx++;
 	}
 	free_arr(split_line);

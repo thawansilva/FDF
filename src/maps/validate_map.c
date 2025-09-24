@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 16:36:16 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/22 17:17:47 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/24 11:53:52 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	is_valid_line(char *line)
 
 	if (line == NULL)
 		return (0);
-	arr = ft_split(line, ' ');
+	arr = ft_split(line, " ");
 	width = 0;
 	i = 0;
 	while (arr[i])
@@ -104,8 +104,6 @@ void	validate_map(char **argv, t_mlx_data *fdf_data)
 	fd = open(*argv, O_RDONLY);
 	if (fd < 0)
 		error_msg(strerror(errno));
-	fdf_data->map.height = 0;
-	fdf_data->file_line = NULL;
 	while (true)
 	{
 		line = get_next_line(fd);
@@ -122,4 +120,5 @@ void	validate_map(char **argv, t_mlx_data *fdf_data)
 	if (fdf_data->map.height < 2)
 		terminate_process(fdf_data, NULL, fd);
 	close(fd);
+	ft_putendl_fd("✅ Valid Map", STDOUT);
 }

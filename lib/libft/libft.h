@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:04:57 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/15 17:37:33 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/23 13:07:41 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-// Standard Outputs
-# define STDIN 0
-# define STDOUT 1
-# define STDERR 2
+// Standard Streams
+enum e_stream
+{
+	STDIN,
+	STDOUT,
+	STDERR
+};
 
 // True / False MACROS
 # define FALSE 0
@@ -58,7 +61,7 @@ char						*ft_substr(const char *s, unsigned int start,
 char						*ft_strjoin(char const *s1, char const *s2);
 char						*ft_strtrim(char const *s1, char const *set);
 char						*ft_itoa(int n);
-char						**ft_split(char const *s, char c);
+char						**ft_split(char const *s, char *charset);
 char						*ft_strmapi(char const *s, char (*f)(unsigned int,
 									char));
 void						ft_striteri(char *s, void (*f)(unsigned int,
@@ -93,11 +96,6 @@ void						ft_putchar_fd(char c, int fd);
 void						ft_putstr_fd(char *c, int fd);
 void						ft_putnbr_fd(int n, int fd);
 void						ft_putendl_fd(char *s, int fd);
-
-// ---------------------------- Extra Functions -------------------------------
-void						ft_swap_string(char **str1, char **str2);
-void						ft_swap_char(char chr1, char chr2);
-void						ft_swap_int(int n1, int n2);
 
 // ---------------------------- Get Next Line ---------------------------------
 char						*get_next_line(int fd);
