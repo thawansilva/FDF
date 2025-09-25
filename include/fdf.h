@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:33:44 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/24 17:05:20 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/25 15:47:36 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define HEIGHT 1080
 # define MENU_WIDTH 300
 # define QNT_IMAGES 2
-# define HEX_BASE "123456789ABCDEF"
+# define HEX_BASE "0123456789ABCDEF"
 
 // Limit
 # define INT_MAX 2147483647 

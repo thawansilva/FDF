@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:00:05 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/24 20:00:52 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/25 15:46:10 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	draw_map(t_mlx_data *fdf)
 	{
 		if (matrix[i] == NULL)
 			return ;
-		mlx_put_pixel(fdf->imgs[WIREFRAME], matrix[i]->x * 2,
-			matrix[i]->y * 2, matrix[i]->color);
+		mlx_put_pixel(fdf->imgs[WIREFRAME], matrix[i]->x * 20,
+			matrix[i]->y * 20, matrix[i]->color);
 		i++;
 	}
 }
