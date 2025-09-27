@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:33:44 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/25 15:47:36 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/27 17:35:06 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define MENU_WIDTH 300
 # define QNT_IMAGES 2
 # define HEX_BASE "0123456789ABCDEF"
+# define ABS(Value) ((Value) * ((Value) >= 0) - (Value) * ((Value) < 0))
 
 // Limit
 # define INT_MAX 2147483647 
@@ -43,8 +44,8 @@ typedef struct s_3dpoint
 
 typedef struct s_line
 {
+	t_3dpoint	p0;
 	t_3dpoint	p1;
-	t_3dpoint	p2;
 }	t_line;
 
 typedef struct s_map
@@ -53,6 +54,17 @@ typedef struct s_map
 	int			height;
 	int			max_width;
 }	t_map;
+
+typedef struct s_bresenham
+{
+	t_line		line;
+	int			delta_x;
+	int			delta_y;
+	int			slope_x;
+	int			slope_y;
+	int			error;
+	int			error_2;
+}	t_bresenham;
 
 typedef struct s_mlx_data
 {
@@ -65,6 +77,9 @@ typedef struct s_mlx_data
 // Images
 void	create_images(t_mlx_data *fdf);
 void	draw_menu(t_mlx_data *fdf);
+
+// Bresenham
+void	bresenham(mlx_image_t *fdf, t_line line);
 
 // Map functions
 void	init_map(char **argv, t_mlx_data *fdf);

@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:17:09 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/24 17:27:16 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/27 14:48:09 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ static int	find_index_in_base(char letter, char *base)
 	return (-1);
 }
 
-static unsigned int	convert_str_to_int(char *str, char *base)
+static int	convert_str_to_int(char *str, char *base)
 {
-	int				i;
-	int				base_length;
-	int				value;
-	unsigned int	result;
+	int	i;
+	int	base_length;
+	int	value;
+	int	result;
 
 	base_length = ft_strlen(base);
 	i = 0;
@@ -71,9 +71,9 @@ static unsigned int	convert_str_to_int(char *str, char *base)
 	return (result);
 }
 
-unsigned int	ft_atoi_base(char *str, char *base)
+int	ft_atoi_base(char *str, char *base)
 {
-	unsigned int	result;
+	int	result;
 
 	if (!is_valid_base(base) || *str == '\0')
 		return (0);

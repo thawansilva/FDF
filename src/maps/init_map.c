@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 16:06:18 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/25 15:51:58 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/27 16:09:19 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	set_3dpoint(t_map *map, char **arr, int *row_idx, int *col_idx)
 
 	point = (t_3dpoint *)malloc(sizeof(t_3dpoint));
 	altitude = ft_atoi(arr[*col_idx]);
-	point->x = *row_idx;
-	point->y = *col_idx;
+	point->x = *row_idx * 10;
+	point->y = *col_idx * 10;
 	point->z = altitude;
 	hex_color = ft_strchr(arr[*row_idx * map->max_width + *col_idx], ',');
 	if (hex_color == NULL)
