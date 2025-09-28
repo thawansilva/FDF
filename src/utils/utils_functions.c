@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_colors.c                                       :+:      :+:    :+:   */
+/*   utils_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/24 17:44:23 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/28 11:14:40 by thaperei         ###   ########.fr       */
+/*   Created: 2025/09/28 11:26:00 by thaperei          #+#    #+#             */
+/*   Updated: 2025/09/28 11:30:34 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	get_red(int rgba)
+#include "fdf.h"
+
+void	put_pixel(mlx_image_t *img, t_3dpoint point)
 {
-	return ((rgba >> 24) & 0xFF);
+	mlx_put_pixel(img, point.x, point.y, point.color);
 }
 
-int	get_green(int rgba)
+int	absolute_value(int value)
 {
-	return ((rgba >> 16) & 0xFF);
-}
-
-int	get_blue(int rgba)
-{
-	return ((rgba >> 8) & 0xFF);
-}
-
-int	get_alpha(int rgba)
-{
-	return (rgba & 0xFF);
-}
-
-int	get_rgba(int red, int green, int blue, int alpha)
-{
-	return (red << 24 | green << 16 | blue << 8 | alpha);
+	return ((value) * ((value) >= 0) - (value) * ((value) < 0));
 }
