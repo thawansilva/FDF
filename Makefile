@@ -6,10 +6,10 @@ MLXDIR := lib/MLX42
 INCDIR := include lib/libft $(MLXDIR)/include
 
 # Source files and Objects
-SRC := main.c error_msg.c free_memory.c maps/init_map.c maps/validate_map.c\
-	   maps/draw_map.c images/create_images.c images/draw_menu.c\
-	   bresenham/bresenham.c colors/get_color_gradient.c\
-	   colors/get_colors.c utils/utils_functions.c\
+SRC := main.c error_msg.c free_memory.c maps/create_map.c maps/validate_map.c\
+	   maps/draw_map.c maps/parse_map.c maps/utils_map.c\
+	   images/create_images.c images/draw_menu.c bresenham/bresenham.c\
+	   colors/get_color_gradient.c colors/get_colors.c utils/utils_functions.c\
 
 SRC := $(SRC:%=$(SRCDIR)/%)
 OBJS := $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
@@ -21,7 +21,7 @@ LIBS_TARGET := lib/libft/libft.a
 
 # Flags
 CC := clang
-CFLAGS := -Wall -Wextra -Werror -g2 -O0
+CFLAGS := -Wall -Wextra -Werror -g2 -O3
 CPPFLAGS := $(addprefix -I, $(INCDIR))
 LDFLAGS := $(addprefix -L, $(dir $(LIBS_TARGET))) -L$(MLXDIR)/build
 LDLIBS := $(addprefix -l, $(LIBS)) -pthread

@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:33:44 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/28 11:38:46 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:51:01 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,18 @@ enum e_images
 
 typedef struct s_3dpoint
 {
+	int	color;
 	int				x;
 	int				y;
 	int				z;
-	unsigned int	color;
 }	t_3dpoint;
+
+typedef struct s_point
+{
+	int	color;
+	int				x;
+	int				y;
+}	t_point;
 
 typedef struct s_line
 {
@@ -50,8 +57,9 @@ typedef struct s_line
 typedef struct s_map
 {
 	t_3dpoint	**matrix;
-	int			height;
 	int			max_width;
+	int			height;
+	int			max_z;
 }	t_map;
 
 typedef struct s_bresenham
@@ -69,14 +77,13 @@ typedef struct s_bresenham
 
 typedef struct s_mlx_data
 {
-	mlx_t		*mlx;
 	mlx_image_t	*imgs[QNT_IMAGES];
-	char		*file_line;
+	mlx_t		*mlx;
 	t_map		map;
 }	t_mlx_data;
 
 // Images
-void	create_images(t_mlx_data *fdf);
+void	create_images(t_mlx_data *fdf, char *filename);
 void	draw_menu(t_mlx_data *fdf);
 
 // Bresenham
@@ -92,14 +99,22 @@ int		get_color_gradient(t_3dpoint current, t_3dpoint start, t_3dpoint end,
 			t_3dpoint delta);
 
 // Map functions
-void	init_map(char **argv, t_mlx_data *fdf);
+void	create_map(t_mlx_data *fdf, char *filename);
+void	parse_map(t_map *map, char *full_line);
 void	draw_map(t_mlx_data *fdf);
+
+// Map utils functions
+int		get_max_width(char *str);
+int		get_height(char *str);
+int		get_max_altitude(t_3dpoint **matrix);
+int		get_point_color(char *str);
 
 // Error Message
 void	error_msg(char *str);
 
 // Map Validation
 void	validate_map(char **argv, t_mlx_data *fdf_data);
+int		is_valid_map(char *file_line);
 
 // Free Memory
 void	free_arr(char **arr);
@@ -108,4 +123,5 @@ void	free_map(t_map *map);
 // Helper functions
 void	put_pixel(mlx_image_t *img, t_3dpoint point);
 int		absolute_value(int value);
+int		get_width(char *str);
 #endif 
