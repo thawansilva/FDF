@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 11:00:05 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/30 16:55:33 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/10/01 12:47:07 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	draw_line(t_mlx_data *fdf, t_3dpoint **matrix, int i, int j)
 	width = fdf->map.max_width;
 	height = fdf->map.height;
 	idx = i * width + j;
+	if (matrix[idx] == NULL)
+		return ;
 	if (j < width - 1 && matrix[idx + 1] != NULL)
 	{
 		line.p0 = *matrix[idx];
@@ -52,8 +54,6 @@ void	draw_map(t_mlx_data *fdf)
 	i = 0;
 	while (i < height)
 	{
-		if (matrix[i] == NULL)
-			return ;
 		j = 0;
 		while (j < width)
 		{

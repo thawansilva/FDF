@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 11:26:00 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/29 17:57:24 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/10/01 12:52:45 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	put_pixel(mlx_image_t *img, t_3dpoint point)
 {
-	if (point.x >= 0 && point.x <= WIDTH && point.y >= 0 && point.y <= HEIGHT)
+	if (point.x >= 0 && point.x < WIDTH && point.y >= 0 && point.y < HEIGHT)
 		mlx_put_pixel(img, point.x, point.y, point.color);
 }
 

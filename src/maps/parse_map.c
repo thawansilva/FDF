@@ -6,57 +6,72 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 10:26:12 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/30 16:51:47 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/10/01 12:57:06 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	place_point_in_map(t_map *map, char **arr_points, int row, int col)
+void	place_point_in_map(t_map *map, char *str, t_point aux)
 {
 	t_3dpoint	*point;
 	char		*color_str;
 
 	point = (t_3dpoint *)malloc(sizeof(t_3dpoint));
-	point->x = col * 20;
-	point->y = row * 20;
-	point->z = ft_atoi(arr_points[col]);
-	color_str = ft_strchr(arr_points[col], ',');
+	point->x = aux.x;
+	point->y = aux.y;
+	point->z = ft_atoi(str);
+	color_str = ft_strchr(str, ',');
 	point->color = get_point_color(color_str);
-	map->matrix[row * map->max_width + col] = point;
+	map->matrix[aux.y * map->max_width + aux.x] = point;
+}
+
+void	fill_points_in_map(t_map *map, char **splited_cols, t_point aux)
+{
+	while (splited_cols[aux.x] != NULL)
+	{
+		place_point_in_map(map, splited_cols[aux.x], aux);
+		aux.x++;
+	}
+	while (aux.x < map->max_width)
+	{
+		place_point_in_map(map, "0", aux);
+		aux.x++;
+	}
 }
 
 static t_3dpoint	**matrix_alloc(int max_width, int height)
 {
-	return (ft_calloc(max_width * height, sizeof(t_3dpoint *) + 1));
+	return (ft_calloc(max_width * height + 1, sizeof(t_3dpoint *)));
 }
 
 void	init_map(t_map *map, char *full_line)
 {
+	t_point	aux;
 	char	**all_lines;
 	char	**splited_cols;
-	int		col;
-	int		row;
 
 	all_lines = ft_split(full_line, "\n");
 	map->matrix = matrix_alloc(map->max_width, map->height);
-	row = 0;
-	while (row < map->height)
+	aux.y = 0;
+	while (aux.y < map->height)
 	{
-		col = 0;
-		splited_cols = ft_split(all_lines[row], " ");
-		if (get_width(all_lines[row]) < map->max_width)
-			return ;
+		aux.x = 0;
+		splited_cols = ft_split(all_lines[aux.y], " ");
+		if (get_width(all_lines[aux.y]) < map->max_width)
+			fill_points_in_map(map, splited_cols, aux);
 		else
 		{
-			while (col < map->max_width)
+			while (aux.x < map->max_width)
 			{
-				place_point_in_map(map, splited_cols, row, col);
-				col++;
+				place_point_in_map(map, splited_cols[aux.x], aux);
+				aux.x++;
 			}
 		}
-		row++;
+		free_arr(splited_cols);
+		aux.y++;
 	}
+	free_arr(all_lines);
 }
 
 void	parse_map(t_map *map, char *full_line)

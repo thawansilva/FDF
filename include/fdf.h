@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:33:44 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/30 16:51:01 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/10/01 10:15:52 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <errno.h>
 # include <string.h>
 # include <fcntl.h>
+# include <math.h>
 # include "libft.h"
 # include "MLX42/MLX42.h"
 // Window
@@ -36,16 +37,16 @@ enum e_images
 typedef struct s_3dpoint
 {
 	int	color;
-	int				x;
-	int				y;
-	int				z;
+	int	x;
+	int	y;
+	int	z;
 }	t_3dpoint;
 
 typedef struct s_point
 {
 	int	color;
-	int				x;
-	int				y;
+	int	x;
+	int	y;
 }	t_point;
 
 typedef struct s_line
