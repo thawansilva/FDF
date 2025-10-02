@@ -47,7 +47,7 @@ int	get_height(char *str)
 	return (height);
 }
 
-int	get_max_altitude(t_3dpoint **matrix)
+int	get_max_altitude(t_point **matrix)
 {
 	int	max_altitude;
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 10:26:12 by thaperei          #+#    #+#             */
-/*   Updated: 2025/10/01 12:57:06 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/10/01 19:07:39 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	place_point_in_map(t_map *map, char *str, t_point aux)
 {
-	t_3dpoint	*point;
-	char		*color_str;
+	t_point	*point;
+	char	*color_str;
 
-	point = (t_3dpoint *)malloc(sizeof(t_3dpoint));
+	point = (t_point *)malloc(sizeof(t_point));
 	point->x = aux.x;
 	point->y = aux.y;
 	point->z = ft_atoi(str);
@@ -40,9 +40,9 @@ void	fill_points_in_map(t_map *map, char **splited_cols, t_point aux)
 	}
 }
 
-static t_3dpoint	**matrix_alloc(int max_width, int height)
+static t_point	**matrix_alloc(int max_width, int height)
 {
-	return (ft_calloc(max_width * height + 1, sizeof(t_3dpoint *)));
+	return (ft_calloc((max_width * height) + 1, sizeof(t_point *)));
 }
 
 void	init_map(t_map *map, char *full_line)
@@ -79,5 +79,4 @@ void	parse_map(t_map *map, char *full_line)
 	map->max_width = get_max_width(full_line);
 	map->height = get_height(full_line);
 	init_map(map, full_line);
-	map->max_z = get_max_altitude(map->matrix);
 }

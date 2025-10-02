@@ -29,8 +29,8 @@ static int	lerp(int start, int end, double percent)
 	return ((int)(start + percent * (end - start)));
 }
 
-int	get_color_gradient(t_3dpoint current, t_3dpoint start,
-		t_3dpoint end, t_3dpoint delta)
+int	get_color_gradient(t_point current, t_point start,
+		t_point end, t_point delta)
 {
 	int		red;
 	int		blue;

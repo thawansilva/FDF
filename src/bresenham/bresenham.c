@@ -12,9 +12,9 @@
 
 #include "fdf.h"
 
-t_3dpoint	get_point(t_bresenham data)
+t_point	get_point(t_bresenham data)
 {
-	t_3dpoint	point;
+	t_point	point;
 
 	point.x = data.line.p0.x;
 	point.y = data.line.p0.y;

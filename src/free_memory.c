@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 14:04:59 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/29 13:50:20 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:06:35 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	free_arr(char **arr)
 void	free_map(t_map *map)
 {
 	int			i;
-	t_3dpoint	**matrix;
+	t_point	**matrix;
 
 	if (map == NULL)
 		return ;
 	i = 0;
 	matrix = map->matrix;
-	while (i < map->height * map->max_width)
+	while (matrix[i])
 	{
 		free(matrix[i]);
 		i++;

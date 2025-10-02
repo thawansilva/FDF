@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:33:44 by thaperei          #+#    #+#             */
-/*   Updated: 2025/10/01 10:15:52 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/10/02 08:39:39 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include "libft.h"
 # include "MLX42/MLX42.h"
 // Window
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1280
+# define HEIGHT 720
 # define MENU_WIDTH 300
 # define QNT_IMAGES 2
 # define HEX_BASE "0123456789ABCDEF"
@@ -34,38 +34,31 @@ enum e_images
 	MENU
 };
 
-typedef struct s_3dpoint
-{
-	int	color;
-	int	x;
-	int	y;
-	int	z;
-}	t_3dpoint;
-
 typedef struct s_point
 {
 	int	color;
 	int	x;
 	int	y;
+	int	z;
 }	t_point;
 
 typedef struct s_line
 {
-	t_3dpoint	p0;
-	t_3dpoint	p1;
+	t_point	p0;
+	t_point	p1;
 }	t_line;
 
 typedef struct s_map
 {
-	t_3dpoint	**matrix;
+	t_point		**matrix;
+	double		scale;
 	int			max_width;
 	int			height;
-	int			max_z;
 }	t_map;
 
 typedef struct s_bresenham
 {
-	t_3dpoint	delta;
+	t_point	delta;
 	t_line		line;
 	t_line		initial_line;
 	int			delta_x;
@@ -76,11 +69,24 @@ typedef struct s_bresenham
 	int			error_2;
 }	t_bresenham;
 
+typedef struct s_camera
+{
+	double		scale_x;
+	double		scale_y;
+	double		scale;
+	int			angle_x;
+	int			angle_y;
+	int			angle_z;
+	int			offset_x;
+	int			offset_y;
+}	t_camera;
+
 typedef struct s_mlx_data
 {
-	mlx_image_t	*imgs[QNT_IMAGES];
-	mlx_t		*mlx;
-	t_map		map;
+	mlx_image_t		*imgs[QNT_IMAGES];
+	mlx_t			*mlx;
+	t_map			map;
+	t_camera		camera;
 }	t_mlx_data;
 
 // Images
@@ -96,8 +102,8 @@ int		get_green(int rgba);
 int		get_blue(int rgba);
 int		get_alpha(int rgba);
 int		get_rgba(int red, int green, int blue, int alpha);
-int		get_color_gradient(t_3dpoint current, t_3dpoint start, t_3dpoint end,
-			t_3dpoint delta);
+int		get_color_gradient(t_point current, t_point start, t_point end,
+			t_point delta);
 
 // Map functions
 void	create_map(t_mlx_data *fdf, char *filename);
@@ -107,7 +113,7 @@ void	draw_map(t_mlx_data *fdf);
 // Map utils functions
 int		get_max_width(char *str);
 int		get_height(char *str);
-int		get_max_altitude(t_3dpoint **matrix);
+int		get_max_altitude(t_point **matrix);
 int		get_point_color(char *str);
 
 // Error Message
@@ -122,7 +128,7 @@ void	free_arr(char **arr);
 void	free_map(t_map *map);
 
 // Helper functions
-void	put_pixel(mlx_image_t *img, t_3dpoint point);
+void	put_pixel(mlx_image_t *img, t_point point);
 int		absolute_value(int value);
 int		get_width(char *str);
 #endif 

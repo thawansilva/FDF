@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:13:05 by thaperei          #+#    #+#             */
-/*   Updated: 2025/09/30 16:40:41 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/10/02 08:39:58 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 void	init_fdf(t_mlx_data *fdf)
 {
-	fdf->map.height = 0;
-	fdf->map.max_width = 0;
-	fdf->map.max_z = 0;
+	fdf->camera.offset_x = WIDTH / 2 + (WIDTH / 3) / 5; 
+	fdf->camera.offset_y = HEIGHT / 2; 
+	fdf->camera.angle_x = 30;
+	fdf->camera.angle_z = 45;
+	fdf->camera.angle_y = 0;
+	fdf->camera.scale_x = (WIDTH * 0.7) / (fdf->map.max_width);
+	fdf->camera.scale_y = (HEIGHT * 0.7) / (fdf->map.height);
 }
 
 void	delete_fdf(t_mlx_data *fdf)
@@ -46,8 +50,8 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		error_msg("Usage: ./fdf <filename>");
-	init_fdf(&fdf);
 	create_map(&fdf, argv[1]);
+	init_fdf(&fdf);
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	create_images(&fdf, argv[1]);
 	draw_menu(&fdf);
