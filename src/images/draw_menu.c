@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:30:30 by thaperei          #+#    #+#             */
-/*   Updated: 2025/10/01 16:58:01 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/10/02 11:20:04 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	draw_menu(t_mlx_data *fdf)
 	int	i;
 	int	j;
 
-	mlx_image_to_window(fdf->mlx, fdf->imgs[MENU], 0, 0);
 	mlx_put_string(fdf->mlx, "FDF", (MENU_WIDTH - 40) / 2, 40);
 	i = 0;
 	while (i < (int)fdf->imgs[MENU]->width)

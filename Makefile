@@ -7,9 +7,10 @@ INCDIR := include lib/libft $(MLXDIR)/include
 
 # Source files and Objects
 SRC := main.c error_msg.c free_memory.c maps/create_map.c maps/validate_map.c\
-	   maps/draw_map.c maps/parse_map.c maps/utils_map.c\
-	   images/create_images.c images/draw_menu.c bresenham/bresenham.c\
-	   colors/get_color_gradient.c colors/get_colors.c utils/utils_functions.c\
+	   maps/draw_map.c maps/parse_map.c maps/utils_map.c maps/transform_map.c\
+	   maps/transform_point.c images/create_images.c images/draw_menu.c\
+	   bresenham/bresenham.c colors/get_color_gradient.c colors/get_colors.c\
+	   utils/utils_functions.c key_actions/handle_keys.c\
 
 SRC := $(SRC:%=$(SRCDIR)/%)
 OBJS := $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)

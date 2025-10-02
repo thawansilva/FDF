@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 10:26:12 by thaperei          #+#    #+#             */
-/*   Updated: 2025/10/01 19:07:39 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/10/02 17:10:48 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,32 @@ void	init_map(t_map *map, char *full_line)
 	free_arr(all_lines);
 }
 
+double	get_z_range(t_map *map)
+{
+	double	z_max;
+	double	z_min;
+	double	current;
+	int		i;
+
+	i = 0;
+	z_max = map->matrix[i]->z;
+	z_min = map->matrix[i]->z;
+	while (map->matrix[i] != NULL)
+	{
+		current = (double) map->matrix[i]->z;
+		if (current > z_max)
+			z_max = current;
+		if (current < z_min)
+			z_min = current;
+		i++;
+	}
+	return (z_max - z_min);
+}
+
 void	parse_map(t_map *map, char *full_line)
 {
 	map->max_width = get_max_width(full_line);
 	map->height = get_height(full_line);
 	init_map(map, full_line);
+	map->z_range = get_z_range(map);
 }

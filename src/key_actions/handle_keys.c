@@ -1,45 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_memory.c                                      :+:      :+:    :+:   */
+/*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/15 14:04:59 by thaperei          #+#    #+#             */
-/*   Updated: 2025/10/02 16:52:19 by thaperei         ###   ########.fr       */
+/*   Created: 2025/10/02 16:11:36 by thaperei          #+#    #+#             */
+/*   Updated: 2025/10/02 16:52:05 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	free_arr(char **arr)
+void	handle_keys(mlx_key_data_t keydata, void *param)
 {
-	int	i;
+	t_mlx_data	*fdf;
 
-	if (!arr)
-		return ;
-	i = 0;
-	while (arr[i])
+	fdf = (t_mlx_data *)param;
+	if (keydata.action == MLX_PRESS)
 	{
-		free(arr[i]);
-		i++;
+		if (keydata.key == MLX_KEY_ESCAPE)
+			mlx_close_window(fdf->mlx);
 	}
-	free(arr);
-}
-
-void	free_map(t_map *map)
-{
-	int		i;
-	t_point	**matrix;
-
-	if (map == NULL)
-		return ;
-	i = 0;
-	matrix = map->matrix;
-	while (matrix[i])
-	{
-		free(matrix[i]);
-		i++;
-	}
-	free(matrix);
 }

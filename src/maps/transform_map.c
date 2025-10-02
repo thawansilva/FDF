@@ -1,45 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_memory.c                                      :+:      :+:    :+:   */
+/*   transform_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/15 14:04:59 by thaperei          #+#    #+#             */
-/*   Updated: 2025/10/02 16:52:19 by thaperei         ###   ########.fr       */
+/*   Created: 2025/10/02 08:55:43 by thaperei          #+#    #+#             */
+/*   Updated: 2025/10/02 16:12:36 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	free_arr(char **arr)
+void	transform_point(t_mlx_data *fdf, t_point *point)
 {
-	int	i;
-
-	if (!arr)
-		return ;
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
+	scale(fdf, point);
+//	rotate_z(fdf, point);
+//	rotate_x(fdf, point);
+//	rotate_y(fdf, point);
+	translate(fdf, point);
 }
 
-void	free_map(t_map *map)
+void	transform_map(t_mlx_data *fdf, t_map *map)
 {
-	int		i;
-	t_point	**matrix;
+	t_point	*point;
+	int		col;
+	int		row;
 
-	if (map == NULL)
-		return ;
-	i = 0;
-	matrix = map->matrix;
-	while (matrix[i])
+	row = 0;
+	while (row < map->height)
 	{
-		free(matrix[i]);
-		i++;
+		col = 0;
+		while (col < map->max_width)
+		{
+			point = get_map_point(map, col, row);
+			transform_point(fdf, point);
+			col++;
+		}
+		row++;
 	}
-	free(matrix);
 }

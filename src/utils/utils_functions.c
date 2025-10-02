@@ -6,7 +6,7 @@
 /*   By: thaperei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 11:26:00 by thaperei          #+#    #+#             */
-/*   Updated: 2025/10/01 16:54:54 by thaperei         ###   ########.fr       */
+/*   Updated: 2025/10/02 11:45:38 by thaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,9 @@ int	get_width(char *str)
 		i++;
 	}
 	return (width);
+}
+
+t_point	*get_map_point(t_map *map, int x, int y)
+{
+	return (map->matrix[y * map->max_width + x]);
 }
